@@ -6,10 +6,13 @@ from sqlalchemy.orm import sessionmaker, declarative_base, scoped_session
 from .config import Config
 
 # ☐ 1. 엔진 ☐ DB 연결엔진 생성
+# app/__init__.py
 engine = create_engine(
-        Config.SQLALCHEMY_DATABASE_URI,
-        echo=True 
-        connect_args={"check_same_thread": False}) # 📝 engine = "DB로 가는 도로" 📝 SessionLocal = "도로를 이용해 왕복하는 택시" 📝 Base = "이 클래스는 DB테이블로 만들거야 표시하는 도면틀" 
+    Config.SQLALCHEMY_DATABASE_URI,
+    echo=True,
+    connect_args=Config.CONNECT_ARGS
+)
+# 📝 engine = "DB로 가는 도로" 📝 SessionLocal = "도로를 이용해 왕복하는 택시" 📝 Base = "이 클래스는 DB테이블로 만들거야 표시하는 도면틀" 
 # 📝 connect_args={"check_same_thread": False} → 다른 사람도 다른 데이터의 접근권한 사용할 수 있도록
 # ☐ 2. SesiionLocal ☐ 세션 객체 생성
 SessionLocal = scoped_session(
