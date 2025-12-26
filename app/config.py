@@ -11,7 +11,7 @@ class Config:
     TURSO_DATABASE_URL = os.getenv("TURSO_DATABASE_URL")
     TURSO_AUTH_TOKEN = os.getenv("TURSO_AUTH_TOKEN")
 
-    if not TURSO_DATABASE_URL and not TURSO_AUTH_TOKEN:
+    if TURSO_DATABASE_URL and TURSO_AUTH_TOKEN:
         # .env에 값이 있을 시에만 Turso를 사용하도록 설정
         SQLALCHEMY_DATABASE_URI = f"sqlite+{TURSO_DATABASE_URL}?secure=true"
         CONNECT_ARGS = {"auth_token": TURSO_AUTH_TOKEN}
